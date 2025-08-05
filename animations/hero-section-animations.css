@@ -1,0 +1,91 @@
+/* Hero Section Scroll Animations */
+
+/* Initial state - elements start hidden/transformed */
+.hero-section .hero-content {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.hero-section .hero-image {
+  opacity: 0;
+  transform: translateX(50px) scale(0.9);
+  transition: all 1s ease-out 0.2s;
+}
+
+.hero-section .btn {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.hero-section .btn:nth-child(1) {
+  transition-delay: 0.4s;
+}
+
+.hero-section .btn:nth-child(2) {
+  transition-delay: 0.6s;
+}
+
+/* Animated state - when section is in view */
+.hero-section.animate .hero-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section.animate .hero-image {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.hero-section.animate .btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced floating animation for hero image */
+.hero-section.animate .floating-animation {
+  animation: enhancedFloating 6s ease-in-out infinite;
+}
+
+@keyframes enhancedFloating {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(-1deg);
+  }
+}
+
+/* Text reveal animation for hero title */
+.hero-section .display-3 {
+  overflow: hidden;
+}
+
+.hero-section .display-3 span {
+  display: inline-block;
+  transform: translateY(100%);
+  transition: transform 0.8s ease-out 0.3s;
+}
+
+.hero-section.animate .display-3 span {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section .hero-content {
+    transform: translateY(30px);
+  }
+
+  .hero-section .hero-image {
+    transform: translateX(30px) scale(0.95);
+  }
+}

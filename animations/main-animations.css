@@ -1,0 +1,544 @@
+/* 
+ * Main Animations CSS File
+ * Professional scroll-based animations for Sortout Innovation Website
+ * 
+ * Sections included:
+ * 1. Hero Section
+ * 2. Partners Section
+ * 3. About Section
+ * 4. Industries Section
+ * 5. Services Section
+ * 6. Brand Potential Section
+ * 7. Who We Serve Section
+ * 8. Process Section
+ * 9. CTA Section
+ */
+
+/* Global animation settings */
+* {
+  box-sizing: border-box;
+}
+
+/* Performance optimizations */
+.animate {
+  will-change: transform, opacity;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Professional animation timing functions */
+.ease-out {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ease-smooth {
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Professional animation delays utility classes */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+.delay-200 {
+  transition-delay: 0.2s;
+}
+.delay-300 {
+  transition-delay: 0.3s;
+}
+.delay-400 {
+  transition-delay: 0.4s;
+}
+.delay-500 {
+  transition-delay: 0.5s;
+}
+.delay-600 {
+  transition-delay: 0.6s;
+}
+.delay-700 {
+  transition-delay: 0.7s;
+}
+.delay-800 {
+  transition-delay: 0.8s;
+}
+.delay-900 {
+  transition-delay: 0.9s;
+}
+.delay-1000 {
+  transition-delay: 1s;
+}
+.delay-1200 {
+  transition-delay: 1.2s;
+}
+.delay-1500 {
+  transition-delay: 1.5s;
+}
+
+/* Professional animation durations utility classes */
+.duration-500 {
+  transition-duration: 0.5s;
+}
+.duration-700 {
+  transition-duration: 0.7s;
+}
+.duration-1000 {
+  transition-duration: 1s;
+}
+.duration-1200 {
+  transition-duration: 1.2s;
+}
+.duration-1500 {
+  transition-duration: 1.5s;
+}
+
+/* Loading states */
+.section-loading {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.section-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Debug mode styles */
+.debug-animations .animate {
+  outline: 2px solid red;
+  outline-offset: 2px;
+}
+
+.debug-animations .animate::before {
+  content: "ANIMATED";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  background: red;
+  color: white;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  z-index: 1000;
+}
+
+/* Performance monitoring */
+.animation-performance {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 1000;
+  display: none;
+}
+
+.debug-animations .animation-performance {
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate {
+    transition-duration: 0.8s !important;
+  }
+
+  .animate [class*="delay-"] {
+    transition-delay: 0.2s !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .animate {
+    transition-duration: 0.6s !important;
+  }
+
+  .floating-animation,
+  .parallax-effect {
+    transform: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ===== HERO SECTION ANIMATIONS ===== */
+.hero-section {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section .hero-content h1 {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.hero-section.animate .hero-content h1 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section .hero-content p {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s;
+}
+
+.hero-section.animate .hero-content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section .hero-content .btn {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-section.animate .hero-content .btn:nth-child(1) {
+  transition-delay: 0.9s;
+}
+
+.hero-section.animate .hero-content .btn:nth-child(2) {
+  transition-delay: 1.1s;
+}
+
+.hero-section.animate .hero-content .btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-section .hero-image {
+  opacity: 0;
+  transform: translateX(60px) scale(0.85);
+  transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s;
+}
+
+.hero-section.animate .hero-image {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* ===== PARTNERS SECTION ANIMATIONS ===== */
+.partners-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.partners-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.partners-section .section-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.partners-section.animate .section-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.partners-section .logos {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s;
+}
+
+.partners-section.animate .logos {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ABOUT SECTION ANIMATIONS ===== */
+#about {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#about.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#about .section-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+#about.animate .section-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#about .row > div {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#about.animate .row > div:nth-child(1) {
+  transition-delay: 0.5s;
+}
+
+#about.animate .row > div:nth-child(2) {
+  transition-delay: 0.8s;
+}
+
+#about.animate .row > div {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== INDUSTRIES SECTION ANIMATIONS ===== */
+.industries-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.industries-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.industries-section .industry-box {
+  opacity: 0;
+  transform: translateY(40px) rotate(8deg);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.industries-section.animate .industry-box:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.industries-section.animate .industry-box:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.industries-section.animate .industry-box:nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+.industries-section.animate .industry-box:nth-child(4) {
+  transition-delay: 0.9s;
+}
+
+.industries-section.animate .industry-box {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+/* ===== SERVICES SECTION ANIMATIONS ===== */
+.featured-services {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.featured-services.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.featured-services .service-card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.featured-services.animate .service-card:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.featured-services.animate .service-card:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.featured-services.animate .service-card:nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+.featured-services.animate .service-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ===== BRAND POTENTIAL SECTION ANIMATIONS ===== */
+.brand-potential-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.brand-potential-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-potential-section .potential-card {
+  opacity: 0;
+  transform: translateY(40px) rotateY(15deg);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.brand-potential-section.animate .potential-card:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.brand-potential-section.animate .potential-card:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.brand-potential-section.animate .potential-card:nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+.brand-potential-section.animate .potential-card {
+  opacity: 1;
+  transform: translateY(0) rotateY(0deg);
+}
+
+/* ===== WHO WE SERVE SECTION ANIMATIONS ===== */
+.who-we-serve {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.who-we-serve.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.who-we-serve .service-category {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.who-we-serve.animate .service-category:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.who-we-serve.animate .service-category:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.who-we-serve.animate .service-category:nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+.who-we-serve.animate .service-category {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== PROCESS SECTION ANIMATIONS ===== */
+.our-process {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.our-process.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.our-process .process-step {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.our-process.animate .process-step:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.our-process.animate .process-step:nth-child(2) {
+  transition-delay: 0.5s;
+}
+
+.our-process.animate .process-step:nth-child(3) {
+  transition-delay: 0.7s;
+}
+
+.our-process.animate .process-step:nth-child(4) {
+  transition-delay: 0.9s;
+}
+
+.our-process.animate .process-step {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== CTA SECTION ANIMATIONS ===== */
+.cta-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-section .cta-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.cta-section.animate .cta-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-section .btn {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s;
+}
+
+.cta-section.animate .btn {
+  opacity: 1;
+  transform: translateY(0);
+}

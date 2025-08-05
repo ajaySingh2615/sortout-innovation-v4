@@ -1,0 +1,213 @@
+/* Who We Serve Section Scroll Animations */
+
+/* Initial state - section starts hidden */
+.who-we-serve {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.who-we-serve.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left content animations */
+.who-we-serve .left-content {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.who-we-serve.animate .left-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Right content animations */
+.who-we-serve .right-content {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.who-we-serve.animate .right-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Left side title animation */
+.who-we-serve .left-content h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.who-we-serve.animate .left-content h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left side subheading animation */
+.who-we-serve .left-content .subheading {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+.who-we-serve.animate .left-content .subheading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service category animations with staggered delay */
+.service-category {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+  transition: all 0.6s ease-out;
+}
+
+/* Staggered animation for service categories */
+.who-we-serve.animate .service-category:nth-child(1) {
+  transition-delay: 0.6s;
+}
+
+.who-we-serve.animate .service-category:nth-child(2) {
+  transition-delay: 0.8s;
+}
+
+.who-we-serve.animate .service-category:nth-child(3) {
+  transition-delay: 1s;
+}
+
+.who-we-serve.animate .service-category:nth-child(4) {
+  transition-delay: 1.2s;
+}
+
+/* Animated state for service categories */
+.who-we-serve.animate .service-category {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced hover effects for service categories */
+.service-category {
+  transition: all 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.service-category:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon animation within service categories */
+.service-category i {
+  opacity: 0;
+  transform: scale(0.5) rotate(-30deg);
+  transition: all 0.6s ease-out;
+}
+
+.who-we-serve.animate .service-category i {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Title animation within service categories */
+.service-category h4 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out 0.2s;
+}
+
+.who-we-serve.animate .service-category h4 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Description animation within service categories */
+.service-category p {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.6s ease-out 0.3s;
+}
+
+.who-we-serve.animate .service-category p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced hover effects for icons */
+.service-category:hover i {
+  transform: scale(1.2) rotate(10deg);
+  color: #fff;
+}
+
+/* Background split animation */
+.who-we-serve {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff 50%,
+    #d10000 50%,
+    #d10000 100%
+  );
+  transition: background 1s ease-out 0.5s;
+}
+
+.who-we-serve.animate {
+  background: linear-gradient(to right, #ffffff 50%, #d10000 50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .who-we-serve {
+    background: #ffffff;
+  }
+
+  .who-we-serve.animate {
+    background: #ffffff;
+  }
+
+  .who-we-serve .left-content {
+    transform: translateY(-30px);
+  }
+
+  .who-we-serve .right-content {
+    transform: translateY(30px);
+  }
+
+  .who-we-serve.animate .left-content {
+    transform: translateY(0);
+  }
+
+  .who-we-serve.animate .right-content {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .who-we-serve {
+    transform: translateY(30px);
+  }
+
+  .service-category {
+    transform: translateY(30px) scale(0.85);
+  }
+
+  .who-we-serve.animate .service-category {
+    transition-delay: 0.1s !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .who-we-serve .left-content,
+  .who-we-serve .right-content {
+    padding: 30px 20px;
+  }
+
+  .service-category {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

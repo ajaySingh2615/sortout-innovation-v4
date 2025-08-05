@@ -1,0 +1,223 @@
+/* Process Section Scroll Animations */
+
+/* Initial state - section starts hidden */
+.our-process {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.our-process.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section title animations */
+.our-process .section-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.our-process.animate .section-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Process flow container animation */
+.our-process .process-flow {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.our-process.animate .process-flow {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Connecting line animation */
+.our-process .process-flow::before {
+  height: 0;
+  transition: height 1.5s ease-out 0.6s;
+}
+
+.our-process.animate .process-flow::before {
+  height: 100%;
+}
+
+/* Individual process row animations with staggered delay */
+.process-row {
+  opacity: 0;
+  transform: translateX(-100px) scale(0.9);
+  transition: all 0.8s ease-out;
+}
+
+.process-row.right {
+  transform: translateX(100px) scale(0.9);
+}
+
+/* Staggered animation for process rows */
+.our-process.animate .process-row:nth-child(1) {
+  transition-delay: 0.8s;
+}
+
+.our-process.animate .process-row:nth-child(2) {
+  transition-delay: 1s;
+}
+
+.our-process.animate .process-row:nth-child(3) {
+  transition-delay: 1.2s;
+}
+
+.our-process.animate .process-row:nth-child(4) {
+  transition-delay: 1.4s;
+}
+
+.our-process.animate .process-row:nth-child(5) {
+  transition-delay: 1.6s;
+}
+
+/* Animated state for process rows */
+.our-process.animate .process-row {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* Process icon animations */
+.process-icon {
+  opacity: 0;
+  transform: scale(0.5) rotate(-180deg);
+  transition: all 0.8s ease-out;
+}
+
+.our-process.animate .process-icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Enhanced hover effects for process icons */
+.process-icon {
+  transition: all 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.process-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
+}
+
+/* Process content animations */
+.process-content {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.6s ease-out;
+}
+
+.our-process.animate .process-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced hover effects for process content */
+.process-content {
+  transition: all 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.process-content:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Process title animation */
+.process-content h4 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out 0.2s;
+}
+
+.our-process.animate .process-content h4 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Process description animation */
+.process-content p {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.6s ease-out 0.3s;
+}
+
+.our-process.animate .process-content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced icon animations */
+.process-row:hover .process-icon {
+  animation: iconBounce 0.6s ease-in-out;
+}
+
+@keyframes iconBounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Timeline pulse effect */
+.our-process.animate .process-flow::before {
+  animation: timelinePulse 2s ease-in-out infinite;
+}
+
+@keyframes timelinePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(209, 0, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(209, 0, 0, 0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .our-process {
+    transform: translateY(30px);
+  }
+
+  .process-row {
+    transform: translateY(50px) scale(0.9);
+  }
+
+  .process-row.right {
+    transform: translateY(50px) scale(0.9);
+  }
+
+  .our-process.animate .process-row {
+    transform: translateY(0) scale(1);
+  }
+
+  .our-process.animate .process-row {
+    transition-delay: 0.1s !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .our-process .process-flow {
+    max-width: 100%;
+  }
+
+  .process-content {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .process-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}

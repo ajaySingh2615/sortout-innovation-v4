@@ -1,0 +1,209 @@
+/* Brand Potential Section Scroll Animations */
+
+/* Initial state - section starts hidden */
+.brand-potential-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.brand-potential-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Heading animations */
+.brand-potential-section .brand-heading {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.brand-potential-section.animate .brand-heading {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Subheading animation */
+.brand-potential-section .brand-subheading {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.brand-potential-section.animate .brand-subheading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Brand grid animation */
+.brand-potential-section .brand-grid {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+.brand-potential-section.animate .brand-grid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Glowing core animation */
+.glowing-core {
+  opacity: 0;
+  transform: scale(0.5) rotate(180deg);
+  transition: all 1s ease-out 0.8s;
+}
+
+.brand-potential-section.animate .glowing-core {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Enhanced pulse effect for glowing core */
+.brand-potential-section.animate .glowing-core {
+  animation: enhancedPulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes enhancedPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 40px rgba(255, 75, 75, 0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 60px rgba(255, 75, 75, 0.8);
+  }
+  100% {
+    transform: scale(1.2);
+    box-shadow: 0 0 80px rgba(255, 75, 75, 1);
+  }
+}
+
+/* Floating card animations with staggered delay */
+.floating-card {
+  opacity: 0;
+  transform: translateY(80px) scale(0.7) rotate(15deg);
+  transition: all 0.8s ease-out;
+}
+
+/* Staggered animation for floating cards */
+.brand-potential-section.animate .floating-card:nth-child(1) {
+  transition-delay: 1s;
+}
+
+.brand-potential-section.animate .floating-card:nth-child(2) {
+  transition-delay: 1.2s;
+}
+
+.brand-potential-section.animate .floating-card:nth-child(3) {
+  transition-delay: 1.4s;
+}
+
+.brand-potential-section.animate .floating-card:nth-child(4) {
+  transition-delay: 1.6s;
+}
+
+/* Animated state for floating cards */
+.brand-potential-section.animate .floating-card {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+}
+
+/* Enhanced hover effects for floating cards */
+.floating-card {
+  transition: all 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.floating-card:hover {
+  transform: scale(1.15) translateY(-10px);
+  box-shadow: 0 20px 40px rgba(255, 75, 75, 0.6);
+}
+
+/* Icon animation within floating cards */
+.floating-card i {
+  opacity: 0;
+  transform: scale(0.5) rotate(-30deg);
+  transition: all 0.6s ease-out;
+}
+
+.brand-potential-section.animate .floating-card i {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Title animation within floating cards */
+.floating-card h3 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out 0.2s;
+}
+
+.brand-potential-section.animate .floating-card h3 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Description animation within floating cards */
+.floating-card p {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.6s ease-out 0.3s;
+}
+
+.brand-potential-section.animate .floating-card p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced hover effects for icons */
+.floating-card:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #ff1a1a;
+}
+
+/* Floating animation for cards */
+.brand-potential-section.animate .floating-card {
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .brand-potential-section {
+    transform: translateY(30px);
+  }
+
+  .floating-card {
+    transform: translateY(50px) scale(0.8) rotate(10deg);
+  }
+
+  .brand-potential-section.animate .floating-card {
+    transition-delay: 0.2s !important;
+  }
+
+  .brand-potential-section.animate .floating-card {
+    animation: gentleFloat 4s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 576px) {
+  .brand-potential-section .brand-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .floating-card {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+}

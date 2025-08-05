@@ -1,0 +1,141 @@
+/* Industries Section Scroll Animations */
+
+/* Initial state - section starts hidden */
+.industries-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.industries-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section title animations */
+.industries-section .section-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.industries-section.animate .section-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Industries grid animation */
+.industries-section .industries-grid {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.industries-section.animate .industries-grid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Individual industry box animations with staggered delay */
+.industry-box {
+  opacity: 0;
+  transform: translateY(50px) scale(0.7) rotate(10deg);
+  transition: all 0.8s ease-out;
+}
+
+/* Staggered animation for industry boxes */
+.industries-section.animate .industry-box:nth-child(1) {
+  transition-delay: 0.6s;
+}
+
+.industries-section.animate .industry-box:nth-child(2) {
+  transition-delay: 0.7s;
+}
+
+.industries-section.animate .industry-box:nth-child(3) {
+  transition-delay: 0.8s;
+}
+
+.industries-section.animate .industry-box:nth-child(4) {
+  transition-delay: 0.9s;
+}
+
+.industries-section.animate .industry-box:nth-child(5) {
+  transition-delay: 1s;
+}
+
+.industries-section.animate .industry-box:nth-child(6) {
+  transition-delay: 1.1s;
+}
+
+/* Animated state for industry boxes */
+.industries-section.animate .industry-box {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+}
+
+/* Enhanced hover effects for industry boxes */
+.industry-box {
+  transition: all 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.industry-box:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 15px 35px rgba(209, 0, 0, 0.4);
+}
+
+/* Icon animation within boxes */
+.industry-box .icon {
+  opacity: 0;
+  transform: scale(0.5) rotate(-20deg);
+  transition: all 0.6s ease-out;
+}
+
+.industries-section.animate .industry-box .icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Title animation within boxes */
+.industry-box h4 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out 0.2s;
+}
+
+.industries-section.animate .industry-box h4 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced hover effects for icons */
+.industry-box:hover .icon {
+  transform: scale(1.2) rotate(10deg);
+  color: #ff1a1a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .industries-section {
+    transform: translateY(30px);
+  }
+
+  .industry-box {
+    transform: translateY(30px) scale(0.8) rotate(5deg);
+  }
+
+  .industries-section.animate .industry-box {
+    transition-delay: 0.1s !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .industries-section .industries-grid {
+    gap: 20px;
+  }
+
+  .industry-box {
+    width: 150px;
+    height: 150px;
+  }
+}

@@ -1,0 +1,150 @@
+/* About Section Scroll Animations */
+
+/* Initial state - section starts hidden */
+#about {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+#about.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image animation */
+#about .col-lg-6:first-child {
+  opacity: 0;
+  transform: translateX(-50px) scale(0.95);
+  transition: all 1s ease-out 0.2s;
+}
+
+#about.animate .col-lg-6:first-child {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* Content animation */
+#about .col-lg-6:last-child {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+#about.animate .col-lg-6:last-child {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Title animation */
+#about h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+#about.animate h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Description animation */
+#about .lead {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.8s ease-out 0.8s;
+}
+
+#about.animate .lead {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stats section animation */
+#about .row.g-4 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 1s;
+}
+
+#about.animate .row.g-4 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Individual stat card animations with staggered delay */
+#about .col-sm-4 {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+  transition: all 0.6s ease-out;
+}
+
+/* Staggered animation for stat cards */
+#about.animate .col-sm-4:nth-child(1) {
+  transition-delay: 1.2s;
+}
+
+#about.animate .col-sm-4:nth-child(2) {
+  transition-delay: 1.4s;
+}
+
+#about.animate .col-sm-4:nth-child(3) {
+  transition-delay: 1.6s;
+}
+
+/* Animated state for stat cards */
+#about.animate .col-sm-4 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Enhanced hover effects for stat cards */
+#about .col-sm-4 .p-4 {
+  transition: all 0.3s ease-in-out;
+}
+
+#about .col-sm-4:hover .p-4 {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(209, 0, 0, 0.2);
+}
+
+/* Number counter animation */
+#about .display-6 {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease-out;
+}
+
+#about.animate .display-6 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  #about .col-lg-6:first-child {
+    transform: translateY(-30px) scale(0.95);
+  }
+
+  #about .col-lg-6:last-child {
+    transform: translateY(30px);
+  }
+
+  #about.animate .col-lg-6:first-child {
+    transform: translateY(0) scale(1);
+  }
+
+  #about.animate .col-lg-6:last-child {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  #about {
+    transform: translateY(30px);
+  }
+
+  #about .col-sm-4 {
+    transition-delay: 0.2s !important;
+  }
+}
