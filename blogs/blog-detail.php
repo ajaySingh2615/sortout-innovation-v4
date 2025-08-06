@@ -401,14 +401,14 @@ function formatDate($date_string) {
 
                     <div class="d-flex justify-content-between my-5 me-5">
                         <div class="d-flex align-items-center author-info">
-                            <div class="me-2">
+                            <!-- <div class="me-2">
                                 <img
                                     src="https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg"
                                     alt="<?php echo htmlspecialchars($blog['author']); ?>"
                                     class="img-fluid rounded-circle border"
                                     width="47"
                                 />
-                            </div>
+                            </div> -->
                             <div>
                                 <p class="mb-0">By <b><?php echo htmlspecialchars($blog['author']); ?></b></p>
                             </div>
