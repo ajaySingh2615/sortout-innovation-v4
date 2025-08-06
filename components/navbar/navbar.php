@@ -77,7 +77,7 @@ $createProfileClasses = $createProfileClasses ?? 'btn btn-danger rounded-pill px
                     <a class="nav-link px-3 py-2 rounded-pill text-dark position-relative <?php echo ($currentPage == 'contact') ? 'active fw-semibold bg-danger bg-opacity-10 text-danger' : 'fw-medium hover-effect'; ?>" href="/pages/contact-page/contact-page.php" style="display: block !important; visibility: visible !important; color: #333 !important;">Contact</a>
                 </li>
                 <li class="nav-item" style="display: block !important; visibility: visible !important;">
-                    <a class="nav-link px-3 py-2 rounded-pill text-dark position-relative <?php echo ($currentPage == 'blog') ? 'active fw-semibold bg-danger bg-opacity-10 text-danger' : 'fw-medium hover-effect'; ?>" href="/blog/index.php" style="display: block !important; visibility: visible !important; color: #333 !important;">Blog</a>
+                    <a class="nav-link px-3 py-2 rounded-pill text-dark position-relative <?php echo ($currentPage == 'blog') ? 'active fw-semibold bg-danger bg-opacity-10 text-danger' : 'fw-medium hover-effect'; ?>" href="/blogs/blog.php" style="display: block !important; visibility: visible !important; color: #333 !important;">Blog</a>
                 </li>
                 
                 <?php if ($showCreateProfile): ?>

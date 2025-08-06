@@ -537,7 +537,7 @@ function truncateText($text, $length = 150) {
                                     src="<?php echo !empty($blog['image_url']) ? htmlspecialchars($blog['image_url']) : 'https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg'; ?>"
                                     alt="<?php echo htmlspecialchars($blog['title']); ?>"
                                     class="img-fluid w-100 ezy-blog7-banner"
-                                    style="height: 200px; object-fit: cover; object-position: center;"
+                                    style="height: 280px; object-fit: cover; object-position: center;"
                                 />
                                 <?php if (isset($blog['created_at'])): ?>
                                 <?php $date = formatDate($blog['created_at']); ?>
