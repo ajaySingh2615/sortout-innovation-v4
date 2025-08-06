@@ -432,16 +432,14 @@ function formatDate($date_string) {
 
                     <div class="ezy__blogdetails2_f7S9fPCj-content mt-5">
                         <?php 
-                        // Clean and display content
+                        // Clean and display content properly
                         $cleanContent = html_entity_decode($blog['content'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
                         
                         // Remove data attributes and clean up HTML
                         $cleanContent = preg_replace('/\s+data-[^=]*="[^"]*"/', '', $cleanContent);
                         $cleanContent = preg_replace('/\s+class=""/', '', $cleanContent);
-                        $cleanContent = preg_replace('/\s+data-start="[^"]*"/', '', $cleanContent);
-                        $cleanContent = preg_replace('/\s+data-end="[^"]*"/', '', $cleanContent);
                         
-                        // Display the cleaned content
+                        // Display the cleaned HTML content
                         echo $cleanContent;
                         ?>
                     </div>

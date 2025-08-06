@@ -508,7 +508,7 @@ function truncateText($text, $length = 150) {
                             Explore our latest insights on digital transformation, marketing strategies, and innovative business solutions that drive success in today's competitive landscape.
                         </p>
                         <!-- <a href="#" class="btn ezy__blog7_uzmYkEn6-btn">
-                            <i class="fas fa-plus me-2"></i>Explore All Posts
+                            <i class="fas fa-plus me-2"></i>Load All Posts
                         </a> -->
                     </div>
                 </div>
