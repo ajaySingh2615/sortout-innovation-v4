@@ -300,25 +300,142 @@ function formatDate($date_string) {
 
         /* Popular blog items */
         .ezy__blogdetails2_f7S9fPCj-item {
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border: 1px solid rgba(var(--ezy-theme-color-rgb), 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--ezy-theme-color-rgb), 0.1), transparent);
+            transition: left 0.5s ease;
         }
 
         .ezy__blogdetails2_f7S9fPCj-item:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(var(--ezy-theme-color-rgb), 0.15);
+            border-color: rgba(var(--ezy-theme-color-rgb), 0.3);
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item:hover::before {
+            left: 100%;
         }
 
         .ezy__blogdetails2_f7S9fPCj-item img {
-            width: 80px;
-            height: 60px;
+            width: 90px;
+            height: 70px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item:hover img {
+            transform: scale(1.05);
         }
 
         .ezy__blogdetails2_f7S9fPCj-item h6 {
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.4;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             color: var(--bs-body-color);
+            font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item .blog-meta {
+            font-size: 12px;
+            color: rgba(var(--bs-body-color-rgb), 0.7);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item .blog-meta i {
+            color: var(--ezy-theme-color);
+            font-size: 10px;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-item .blog-meta b {
+            color: var(--ezy-theme-color);
+            font-weight: 600;
+        }
+
+        /* Popular blogs card enhancements */
+        .ezy__blogdetails2_f7S9fPCj-posts {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-posts::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--ezy-theme-color), #b30000, var(--ezy-theme-color));
+            background-size: 200% 100%;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-posts .card-header {
+            position: relative;
+            background: linear-gradient(135deg, var(--ezy-blog-top-color) 0%, #2a3441 100%);
+            border-bottom: 2px solid rgba(var(--ezy-theme-color-rgb), 0.3);
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-posts .card-header h5 {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+
+        .ezy__blogdetails2_f7S9fPCj-posts .card-body {
+            padding: 20px;
+        }
+
+        /* Empty state styling */
+        .no-blogs-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(var(--bs-body-color-rgb), 0.6);
+        }
+
+        .no-blogs-message i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .no-blogs-message h6 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .no-blogs-message p {
+            font-size: 14px;
+            margin: 0;
         }
 
         /* Breadcrumb */
@@ -366,6 +483,64 @@ function formatDate($date_string) {
             
             .ezy__blogdetails2_f7S9fPCj-heading {
                 font-size: 28px;
+            }
+
+            /* Mobile responsive popular blogs */
+            .ezy__blogdetails2_f7S9fPCj-item {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item img {
+                width: 70px;
+                height: 55px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item h6 {
+                font-size: 14px;
+                -webkit-line-clamp: 2;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item .blog-meta {
+                font-size: 11px;
+                gap: 6px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-posts .card-body {
+                padding: 15px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-posts .card-header h5 {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .ezy__blogdetails2_f7S9fPCj-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item img {
+                width: 100%;
+                height: 120px;
+                margin-bottom: 12px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item .ms-3 {
+                margin-left: 0 !important;
+                width: 100%;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item h6 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .ezy__blogdetails2_f7S9fPCj-item .blog-meta {
+                justify-content: center;
+                font-size: 12px;
             }
         }
     </style>
@@ -460,19 +635,24 @@ function formatDate($date_string) {
                                         class="img-fluid rounded"
                                     />
                                     <div class="ms-3">
-                                        <h6><?php echo htmlspecialchars(substr($popularBlog['title'], 0, 50)); ?>...</h6>
-                                        <div class="d-flex flex-wrap opacity-50">
-                                            <span class="me-3"><?php echo $popularBlog['formatted_date']; ?></span>
-                                            <span>By <b><?php echo htmlspecialchars($popularBlog['author']); ?></b></span>
+                                        <h6>
+                                            <a href="/blogs/blog-detail.php?slug=<?php echo urlencode($popularBlog['slug']); ?>" class="text-decoration-none">
+                                                <?php echo htmlspecialchars(substr($popularBlog['title'], 0, 50)); ?>...
+                                            </a>
+                                        </h6>
+                                        <div class="blog-meta">
+                                            <span><i class="fas fa-calendar-alt"></i> <?php echo $popularBlog['formatted_date']; ?></span>
+                                            <span><i class="fas fa-user"></i> By <b><?php echo htmlspecialchars($popularBlog['author']); ?></b></span>
                                         </div>
                                     </div>
                                 </div>
-                                <?php if ($popularBlog !== end($popularBlogs)): ?>
-                                <hr class="my-4" />
-                                <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <p class="text-muted">No other blogs available at the moment.</p>
+                                <div class="no-blogs-message">
+                                    <i class="fas fa-newspaper"></i>
+                                    <h6>No Other Blogs</h6>
+                                    <p>Check back soon for more amazing content!</p>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
