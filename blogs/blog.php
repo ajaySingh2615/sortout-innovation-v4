@@ -1,3 +1,129 @@
+<?php
+// Include database connection
+require_once '../includes/db_connect.php';
+
+// Disable caching to ensure fresh data
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+// Get current page from URL parameter
+$current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$posts_per_page = 6; // Number of posts per page
+
+// Calculate offset
+$offset = ($current_page - 1) * $posts_per_page;
+
+// Fetch blogs directly from database
+try {
+    // Check table structure
+    $structureQuery = "DESCRIBE blogs";
+    $structureResult = $conn->query($structureQuery);
+    $availableColumns = [];
+    if ($structureResult) {
+        while ($field = $structureResult->fetch_assoc()) {
+            $availableColumns[] = $field['Field'];
+        }
+    }
+    
+    // Count total blogs
+    $countQuery = "SELECT COUNT(*) as total FROM blogs";
+    $countResult = $conn->query($countQuery);
+    
+    if (!$countResult) {
+        throw new Exception("Count query failed: " . $conn->error);
+    }
+    
+    $totalRows = $countResult->fetch_assoc()['total'];
+    
+    // Build dynamic query based on available columns
+    $selectColumns = ['id', 'title', 'content'];
+    
+    // Add optional columns if they exist
+    if (in_array('excerpt', $availableColumns)) $selectColumns[] = 'excerpt';
+    if (in_array('image_url', $availableColumns)) $selectColumns[] = 'image_url';
+    if (in_array('slug', $availableColumns)) $selectColumns[] = 'slug';
+    if (in_array('categories', $availableColumns)) $selectColumns[] = 'categories';
+    if (in_array('created_at', $availableColumns)) $selectColumns[] = 'created_at';
+    if (in_array('image_alt', $availableColumns)) $selectColumns[] = 'image_alt';
+    
+    // Fetch blogs with pagination
+    $query = "SELECT " . implode(', ', $selectColumns) . " 
+              FROM blogs 
+              ORDER BY " . (in_array('created_at', $availableColumns) ? 'created_at' : 'id') . " DESC 
+              LIMIT $posts_per_page OFFSET $offset";
+    
+    $result = $conn->query($query);
+    
+    if ($result) {
+        $blogs = [];
+        while ($row = $result->fetch_assoc()) {
+            // Format date
+            if (isset($row['created_at'])) {
+                $date = new DateTime($row['created_at']);
+                $row['formatted_date'] = $date->format('M d, Y');
+            } else {
+                $row['formatted_date'] = 'N/A';
+            }
+            
+            // Handle categories
+            if (isset($row['categories']) && !empty($row['categories'])) {
+                if (strpos($row['categories'], '[') === 0) {
+                    // JSON format
+                    $row['categories'] = json_decode($row['categories'], true) ?: [];
+                } else {
+                    // Comma-separated format
+                    $row['categories'] = explode(',', $row['categories']);
+                }
+            } else {
+                $row['categories'] = [];
+            }
+            
+            // Generate excerpt if not present
+            if (!isset($row['excerpt']) && isset($row['content'])) {
+                $row['excerpt'] = substr(strip_tags($row['content']), 0, 150) . '...';
+            }
+            
+            $blogs[] = $row;
+        }
+        
+        // Calculate pagination
+        $totalPages = ceil($totalRows / $posts_per_page);
+        $pagination = [
+            'current_page' => $current_page,
+            'total_pages' => $totalPages,
+            'total_rows' => $totalRows
+        ];
+    } else {
+        throw new Exception("Database query failed");
+    }
+} catch (Exception $e) {
+    // Fallback if database fails
+    $blogs = [];
+    $pagination = [
+        'current_page' => 1,
+        'total_pages' => 1,
+        'total_rows' => 0
+    ];
+}
+
+// Function to format date
+function formatDate($date_string) {
+    $date = new DateTime($date_string);
+    return [
+        'day' => $date->format('d'),
+        'month' => $date->format('M'),
+        'year' => $date->format('Y')
+    ];
+}
+
+// Function to truncate text
+function truncateText($text, $length = 150) {
+    if (strlen($text) <= $length) {
+        return $text;
+    }
+    return substr($text, 0, $length) . '...';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -194,7 +320,17 @@
             color: var(--ezy-theme-color);
         }
 
-
+        /* Category Tags */
+        .blog-category-tag {
+            display: inline-block;
+            background-color: rgba(var(--ezy-theme-color-rgb), 0.1);
+            color: var(--ezy-theme-color);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            margin: 0.1rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
 
         /* Breadcrumb */
         .breadcrumb-section {
@@ -306,6 +442,19 @@
                 font-size: 13px;
             }
         }
+
+        /* No posts message */
+        .no-posts {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-posts i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
@@ -316,8 +465,6 @@
     // Include navbar
     include '../components/navbar/navbar.php'; 
     ?>
-
-
 
     <!-- Breadcrumb -->
     <section class="breadcrumb-section">
@@ -349,181 +496,131 @@
                     </div>
                 </div>
                 
+                <?php if (empty($blogs)): ?>
+                <!-- No Posts Message -->
                 <div class="row mt-5">
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
-                            <div class="position-relative">
-                                <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg"
-                                    alt="Digital Marketing Trends"
-                                    class="img-fluid w-100 ezy-blog7-banner"
-                                />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">26<br />Oct<br />2024</div>
-                            </div>
-                            <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">Ben Stokes</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">Digital Marketing Trends That Will Dominate 2024</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Discover the latest digital marketing trends that are reshaping how businesses connect with their audiences and drive growth.
-                                </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
-                                    <i class="fas fa-arrow-right me-1"></i>Read More
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
-                            <div class="position-relative">
-                                <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_13_1.jpg"
-                                    alt="IT Solutions"
-                                    class="img-fluid w-100 ezy-blog7-banner"
-                                />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">11<br />May<br />2024</div>
-                            </div>
-                            <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">Moein Ali</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">Modern IT Solutions for Business Growth</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Learn how cutting-edge IT solutions can transform your business operations and accelerate growth in the digital age.
-                                </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
-                                    <i class="fas fa-arrow-right me-1"></i>Read More
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
-                            <div class="position-relative">
-                                <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_9.jpg"
-                                    alt="Business Innovation"
-                                    class="img-fluid w-100 ezy-blog7-banner"
-                                />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">19<br />Mar<br />2024</div>
-                            </div>
-                            <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">Maxy Paulo</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">Innovation Strategies for Business Success</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Explore proven innovation strategies that successful companies use to stay ahead of the competition and drive sustainable growth.
-                                </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
-                                    <i class="fas fa-arrow-right me-1"></i>Read More
-                                </a>
-                            </div>
-                        </article>
+                    <div class="col-12">
+                        <div class="no-posts">
+                            <i class="fas fa-newspaper"></i>
+                            <h3>No Blog Posts Available</h3>
+                            <p>We're working on creating amazing content for you. Check back soon!</p>
+                            
+
+                        </div>
                     </div>
                 </div>
-
-                <!-- Additional Blog Posts -->
-                <div class="row mt-4">
+                <?php else: ?>
+                <!-- Blog Posts Grid -->
+                <div class="row mt-5">
+                    <?php foreach ($blogs as $blog): ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
                         <article class="ezy__blog7_uzmYkEn6-post">
                             <div class="position-relative">
                                 <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg"
-                                    alt="HR Solutions"
+                                    src="<?php echo !empty($blog['image_url']) ? htmlspecialchars($blog['image_url']) : 'https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg'; ?>"
+                                    alt="<?php echo htmlspecialchars($blog['title']); ?>"
                                     class="img-fluid w-100 ezy-blog7-banner"
+                                    style="height: 200px; object-fit: cover; object-position: center;"
                                 />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">15<br />Feb<br />2024</div>
+                                <?php if (isset($blog['created_at'])): ?>
+                                <?php $date = formatDate($blog['created_at']); ?>
+                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">
+                                    <?php echo $date['day']; ?><br />
+                                    <?php echo $date['month']; ?><br />
+                                    <?php echo $date['year']; ?>
+                                </div>
+                                <?php endif; ?>
                             </div>
                             <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">Sarah Johnson</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">Modern HR Solutions for Remote Teams</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Discover effective HR strategies and tools for managing remote teams and maintaining productivity in the new work environment.
+                                <p class="ezy__blog7_uzmYkEn6-author">
+                                    By <a href="#" class="text-decoration-none">Sortout Innovation</a>
                                 </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
+                                
+                                <!-- Category Tags -->
+                                <?php if (!empty($blog['categories'])): ?>
+                                <div class="mb-2">
+                                    <?php 
+                                    $categories = is_array($blog['categories']) ? $blog['categories'] : explode(',', $blog['categories']);
+                                    foreach (array_slice($categories, 0, 2) as $category): // Show max 2 categories
+                                    ?>
+                                    <span class="blog-category-tag"><?php echo htmlspecialchars(trim($category)); ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php endif; ?>
+                                
+                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">
+                                    <?php echo htmlspecialchars($blog['title']); ?>
+                                </h4>
+                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
+                                    <?php 
+                                    $excerpt = !empty($blog['excerpt']) ? $blog['excerpt'] : $blog['content'];
+                                    echo htmlspecialchars(truncateText(strip_tags($excerpt), 120));
+                                    ?>
+                                </p>
+                                <a href="/blog/post.php?slug=<?php echo urlencode($blog['slug']); ?>" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
                                     <i class="fas fa-arrow-right me-1"></i>Read More
                                 </a>
                             </div>
                         </article>
                     </div>
-                    
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
-                            <div class="position-relative">
-                                <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_13_1.jpg"
-                                    alt="E-commerce Solutions"
-                                    class="img-fluid w-100 ezy-blog7-banner"
-                                />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">08<br />Jan<br />2024</div>
-                            </div>
-                            <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">David Chen</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">E-commerce Solutions for Business Growth</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Learn how to leverage e-commerce platforms and solutions to expand your business reach and increase sales revenue.
-                                </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
-                                    <i class="fas fa-arrow-right me-1"></i>Read More
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
-                            <div class="position-relative">
-                                <img
-                                    src="https://cdn.easyfrontend.com/pictures/blog/blog_9.jpg"
-                                    alt="Event Management"
-                                    class="img-fluid w-100 ezy-blog7-banner"
-                                />
-                                <div class="px-4 py-3 ezy__blog7_uzmYkEn6-calendar">22<br />Dec<br />2023</div>
-                            </div>
-                            <div class="p-3 p-md-4">
-                                <p class="ezy__blog7_uzmYkEn6-author">By <a href="#" class="text-decoration-none">Emma Wilson</a></p>
-                                <h4 class="mt-3 ezy__blog7_uzmYkEn6-title fs-4">Event Management in the Digital Age</h4>
-                                <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
-                                    Explore innovative event management strategies and digital tools that are revolutionizing how we plan and execute events.
-                                </p>
-                                <a href="#" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
-                                    <i class="fas fa-arrow-right me-1"></i>Read More
-                                </a>
-                            </div>
-                        </article>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <!-- Pagination -->
+                <?php if ($pagination['total_pages'] > 1): ?>
                 <div class="row mt-5">
                     <div class="col-12">
                         <nav aria-label="Blog pagination">
                             <ul class="pagination justify-content-center mb-0">
                                 <!-- Previous Page -->
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous page">
+                                <li class="page-item <?php echo ($pagination['current_page'] <= 1) ? 'disabled' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $pagination['current_page'] - 1; ?>" 
+                                       <?php echo ($pagination['current_page'] <= 1) ? 'tabindex="-1" aria-disabled="true"' : ''; ?> 
+                                       aria-label="Previous page">
                                         <i class="fas fa-chevron-left"></i>
                                     </a>
                                 </li>
                                 
                                 <!-- Page Numbers -->
-                                <li class="page-item active">
-                                    <a class="page-link" href="#" aria-label="Page 1">1</a>
-                                </li>
+                                <?php
+                                $start_page = max(1, $pagination['current_page'] - 2);
+                                $end_page = min($pagination['total_pages'], $pagination['current_page'] + 2);
+                                
+                                // Show first page if not in range
+                                if ($start_page > 1): ?>
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Page 2">2</a>
+                                    <a class="page-link" href="?page=1" aria-label="Page 1">1</a>
                                 </li>
+                                <?php if ($start_page > 2): ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                                
+                                <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
+                                <li class="page-item <?php echo ($i == $pagination['current_page']) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $i; ?>" aria-label="Page <?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                                <?php endfor; ?>
+                                
+                                <!-- Show last page if not in range -->
+                                <?php if ($end_page < $pagination['total_pages']): ?>
+                                <?php if ($end_page < $pagination['total_pages'] - 1): ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                <?php endif; ?>
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Page 3">3</a>
+                                    <a class="page-link" href="?page=<?php echo $pagination['total_pages']; ?>" aria-label="Page <?php echo $pagination['total_pages']; ?>"><?php echo $pagination['total_pages']; ?></a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Page 4">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Page 5">5</a>
-                                </li>
+                                <?php endif; ?>
                                 
                                 <!-- Next Page -->
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next page">
+                                <li class="page-item <?php echo ($pagination['current_page'] >= $pagination['total_pages']) ? 'disabled' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $pagination['current_page'] + 1; ?>" 
+                                       <?php echo ($pagination['current_page'] >= $pagination['total_pages']) ? 'aria-disabled="true"' : ''; ?> 
+                                       aria-label="Next page">
                                         <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </li>
@@ -533,11 +630,13 @@
                         <!-- Pagination Info -->
                         <div class="text-center mt-3">
                             <small class="text-muted">
-                                Showing 1-6 of 24 blog posts
+                                Showing <?php echo (($pagination['current_page'] - 1) * $posts_per_page) + 1; ?>-<?php echo min($pagination['current_page'] * $posts_per_page, $pagination['total_rows']); ?> of <?php echo $pagination['total_rows']; ?> blog posts
                             </small>
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
