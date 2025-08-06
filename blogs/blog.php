@@ -194,26 +194,7 @@
             color: var(--ezy-theme-color);
         }
 
-        /* Blog Hero Section */
-        .blog-hero {
-            background: linear-gradient(135deg, #d10000 0%, #b30000 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
 
-        .blog-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .blog-hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
 
         /* Breadcrumb */
         .breadcrumb-section {
@@ -229,6 +210,102 @@
         .breadcrumb-item.active {
             color: #6c757d;
         }
+
+        /* Modern Pagination Styling */
+        .pagination {
+            gap: 8px;
+            margin: 0;
+        }
+
+        .pagination .page-link {
+            border: none;
+            color: #495057;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            background-color: transparent;
+            min-width: 40px;
+            height: 40px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pagination .page-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--ezy-theme-color), #b30000);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s ease;
+            z-index: -1;
+        }
+
+        .pagination .page-link:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .pagination .page-link:hover::before {
+            transform: scale(1);
+        }
+
+        .pagination .page-item.active .page-link {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--ezy-theme-color), #b30000);
+            box-shadow: 0 4px 15px rgba(209, 0, 0, 0.4);
+        }
+
+        .pagination .page-item.active .page-link::before {
+            display: none;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #dee2e6;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .pagination .page-item.disabled .page-link:hover {
+            transform: none;
+            color: #dee2e6;
+        }
+
+        .pagination .page-item.disabled .page-link::before {
+            display: none;
+        }
+
+        /* Pagination Icons */
+        .pagination .page-link i {
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .pagination .page-link:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Pagination */
+        @media (max-width: 576px) {
+            .pagination {
+                gap: 5px;
+            }
+            
+            .pagination .page-link {
+                padding: 8px 12px;
+                min-width: 35px;
+                height: 35px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -240,17 +317,7 @@
     include '../components/navbar/navbar.php'; 
     ?>
 
-    <!-- Blog Hero Section -->
-    <section class="blog-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Our Blog</h1>
-                    <p>Discover insights, trends, and expert tips in digital marketing, IT solutions, and business innovation</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Breadcrumb -->
     <section class="breadcrumb-section">
@@ -429,22 +496,46 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <nav aria-label="Blog pagination">
-                            <ul class="pagination justify-content-center">
+                            <ul class="pagination justify-content-center mb-0">
+                                <!-- Previous Page -->
                                 <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous page">
                                         <i class="fas fa-chevron-left"></i>
                                     </a>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                
+                                <!-- Page Numbers -->
+                                <li class="page-item active">
+                                    <a class="page-link" href="#" aria-label="Page 1">1</a>
+                                </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="#">
+                                    <a class="page-link" href="#" aria-label="Page 2">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Page 3">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Page 4">4</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Page 5">5</a>
+                                </li>
+                                
+                                <!-- Next Page -->
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next page">
                                         <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </li>
                             </ul>
                         </nav>
+                        
+                        <!-- Pagination Info -->
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                Showing 1-6 of 24 blog posts
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
