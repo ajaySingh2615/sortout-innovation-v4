@@ -247,6 +247,9 @@ function truncateText($text, $length = 150) {
             box-shadow: var(--ezy-card-shadow);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .ezy__blog7_uzmYkEn6-post:hover {
@@ -279,11 +282,25 @@ function truncateText($text, $length = 150) {
             font-weight: 500;
             margin-top: 0 !important;
             color: var(--bs-body-color);
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .ezy__blog7_uzmYkEn6-description {
             color: var(--bs-body-color);
             opacity: 0.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1;
         }
 
         .ezy__blog7_uzmYkEn6-btn {
@@ -531,7 +548,7 @@ function truncateText($text, $length = 150) {
                                 </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="p-3 p-md-4">
+                            <div class="p-3 p-md-4 d-flex flex-column h-100">
                                 <p class="ezy__blog7_uzmYkEn6-author">
                                     By <a href="#" class="text-decoration-none">Sortout Innovation</a>
                                 </p>
@@ -554,10 +571,11 @@ function truncateText($text, $length = 150) {
                                 <p class="ezy__blog7_uzmYkEn6-description mt-3 mb-4">
                                     <?php 
                                     $excerpt = !empty($blog['excerpt']) ? $blog['excerpt'] : $blog['content'];
-                                    echo htmlspecialchars(truncateText(strip_tags($excerpt), 120));
+                                    $cleanExcerpt = html_entity_decode(strip_tags($excerpt), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                                    echo htmlspecialchars(truncateText($cleanExcerpt, 120));
                                     ?>
                                 </p>
-                                <a href="/blog/post.php?slug=<?php echo urlencode($blog['slug']); ?>" class="btn ezy__blog7_uzmYkEn6-btn-read-more">
+                                <a href="/blog/post.php?slug=<?php echo urlencode($blog['slug']); ?>" class="btn ezy__blog7_uzmYkEn6-btn-read-more mt-auto">
                                     <i class="fas fa-arrow-right me-1"></i>Read More
                                 </a>
                             </div>
