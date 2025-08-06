@@ -575,7 +575,7 @@ function truncateText($text, $length = 150) {
                                     echo htmlspecialchars(truncateText($cleanExcerpt, 120));
                                     ?>
                                 </p>
-                                <a href="/blog/post.php?slug=<?php echo urlencode($blog['slug']); ?>" class="btn ezy__blog7_uzmYkEn6-btn-read-more mt-auto">
+                                <a href="/blogs/blog-detail.php?slug=<?php echo urlencode($blog['slug']); ?>" class="btn ezy__blog7_uzmYkEn6-btn-read-more mt-auto">
                                     <i class="fas fa-arrow-right me-1"></i>Read More
                                 </a>
                             </div>
