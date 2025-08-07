@@ -143,15 +143,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-lg-7 text-center text-lg-start mb-5 mb-lg-0">
-                    <h2 class="ezy__header42_LIvGiG1q-heading mb-4">Let's Reveal Something New!</h2>
-                    <div class="row">
-                        <div class="col-12 col-lg-8">
-                            <p class="ezy__header42_LIvGiG1q-sub-heading mb-5">
-                                An activity that requires a person's mental or physical effort is work.If a person is trained for a
-                                certain type of job, they may have a job or profession which suits.
-                            </p>
-                        </div>
-                    </div>
+                                         <h2 class="ezy__header42_LIvGiG1q-heading mb-4">One Source,<br>Infinite Solutions</h2>
+                     <div class="row">
+                         <div class="col-12 col-lg-8">
+                             <p class="ezy__header42_LIvGiG1q-sub-heading mb-5">
+                                 At Sortout Innovation, we provide top-tier solutions in Digital Marketing, IT, HR, Courier, Real Estate, Event Management, and more. Your success is our priority.
+                             </p>
+                         </div>
+                     </div>
                     <button class="btn ezy__header42_LIvGiG1q-btn rounded-pill">Schedule a free session</button>
                 </div>
                 <div class="col-12 col-lg-5 position-relative text-center">
@@ -174,11 +173,11 @@
                     </svg>
 
                     <div>
-                        <img
-                            src="https://cdn.easyfrontend.com/pictures/hero/hero-6.png"
-                            alt=""
-                            class="img-fluid ezy__header42_LIvGiG1q-img"
-                        />
+                                                 <img
+                             src="../assets/img/Home-Page/hero-image.webp"
+                             alt="Sortout Innovation Hero"
+                             class="img-fluid ezy__header42_LIvGiG1q-img"
+                         />
                     </div>
                 </div>
             </div>

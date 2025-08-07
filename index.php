@@ -57,6 +57,14 @@
 </head>
 
   <body>
+    <?php 
+    // Set current page for navbar active state
+    $currentPage = 'home';
+    
+    // Include navbar
+    include 'components/navbar/navbar.php'; 
+    ?>
+
     <!-- Hero Section -->
     <section class="hero-section py-5 min-vh-100 d-flex align-items-center overflow-hidden position-relative bg-gradient">
         <div class="container">
