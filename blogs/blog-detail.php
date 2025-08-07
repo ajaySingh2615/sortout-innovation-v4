@@ -179,6 +179,9 @@ function formatDate($date_string) {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/CSS/styles.css?v=2.0" />
     
+    <!-- Blog Animations CSS -->
+    <link rel="stylesheet" href="blog-animations.css" />
+    
     <!-- Blog Detail Specific CSS -->
     <style>
         .ezy__blogdetails2_f7S9fPCj {
@@ -555,7 +558,7 @@ function formatDate($date_string) {
     ?>
 
     <!-- Breadcrumb -->
-    <section class="breadcrumb-section">
+    <section class="breadcrumb-section breadcrumb-animate">
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
@@ -572,7 +575,7 @@ function formatDate($date_string) {
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8">
-                    <h1 class="ezy__blogdetails2_f7S9fPCj-heading"><?php echo htmlspecialchars($blog['title']); ?></h1>
+                    <h1 class="ezy__blogdetails2_f7S9fPCj-heading blog-title-animate"><?php echo htmlspecialchars($blog['title']); ?></h1>
 
                     <div class="d-flex justify-content-between my-5 me-5">
                         <div class="d-flex align-items-center author-info">
@@ -589,7 +592,7 @@ function formatDate($date_string) {
                             </div>
                             <p class="mb-0 ms-3"><?php echo $blog['formatted_date']; ?></p>
                         </div>
-                        <div class="ezy__blogdetails2_f7S9fPCj-social">
+                        <div class="ezy__blogdetails2_f7S9fPCj-social social-share-animate">
                             <ul class="nav ezy__footer13_f7S9fPCj-quick-links">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode('https://sortoutinnovation.com/blog/detail.php?slug=' . $blog['slug']); ?>" target="_blank"><i class="fab fa-facebook me-3"></i></a>
                                 <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode('https://sortoutinnovation.com/blog/detail.php?slug=' . $blog['slug']); ?>&text=<?php echo urlencode($blog['title']); ?>" target="_blank"><i class="fab fa-twitter me-3"></i></a>
@@ -602,10 +605,10 @@ function formatDate($date_string) {
                     </div>
 
                     <?php if (!empty($blog['image_url'])): ?>
-                    <img src="<?php echo htmlspecialchars($blog['image_url']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="img-fluid rounded blog-main-image" />
+                    <img src="<?php echo htmlspecialchars($blog['image_url']); ?>" alt="<?php echo htmlspecialchars($blog['title']); ?>" class="img-fluid rounded blog-main-image blog-image-animate" />
                     <?php endif; ?>
 
-                    <div class="ezy__blogdetails2_f7S9fPCj-content mt-5">
+                    <div class="ezy__blogdetails2_f7S9fPCj-content mt-5 blog-content-animate">
                         <?php 
                         // Clean and display content properly
                         $cleanContent = html_entity_decode($blog['content'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -620,7 +623,7 @@ function formatDate($date_string) {
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-4">
-                    <div class="card ezy__blogdetails2_f7S9fPCj-posts border-0">
+                    <div class="card ezy__blogdetails2_f7S9fPCj-posts border-0 sidebar-animate">
                         <div class="card-header py-3 border-0">
                             <h5 class="mb-0">Popular Blogs</h5>
                         </div>
@@ -628,7 +631,7 @@ function formatDate($date_string) {
                             <?php if (!empty($popularBlogs)): ?>
                                 <?php foreach ($popularBlogs as $popularBlog): ?>
                                 <!-- blog item -->
-                                <div class="ezy__blogdetails2_f7S9fPCj-item d-flex justify-content-between align-items-start">
+                                <div class="ezy__blogdetails2_f7S9fPCj-item d-flex justify-content-between align-items-start popular-item-animate">
                                     <img
                                         src="<?php echo !empty($popularBlog['image_url']) ? htmlspecialchars($popularBlog['image_url']) : 'https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg'; ?>"
                                         alt="<?php echo htmlspecialchars($popularBlog['title']); ?>"
@@ -668,6 +671,9 @@ function formatDate($date_string) {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Blog Animations JS -->
+    <script src="blog-animations.js"></script>
 
     <!-- Share and Bookmark Scripts -->
     <script>

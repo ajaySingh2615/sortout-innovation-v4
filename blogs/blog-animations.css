@@ -1,0 +1,329 @@
+/* Blog Scrolling Animations */
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+}
+
+/* Fade In Up */
+.fade-in-up {
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+/* Fade In Left */
+.fade-in-left {
+  animation: fadeInLeft 1.2s ease-out forwards;
+}
+
+/* Fade In Right */
+.fade-in-right {
+  animation: fadeInRight 1.2s ease-out forwards;
+}
+
+/* Fade In Scale */
+.fade-in-scale {
+  animation: fadeInScale 1.2s ease-out forwards;
+}
+
+/* Slide In From Bottom */
+.slide-in-bottom {
+  animation: slideInFromBottom 1.2s ease-out forwards;
+}
+
+/* Slide In From Top */
+.slide-in-top {
+  animation: slideInFromTop 1.2s ease-out forwards;
+}
+
+/* Rotate In */
+.rotate-in {
+  animation: rotateIn 1.2s ease-out forwards;
+}
+
+/* Bounce In */
+.bounce-in {
+  animation: bounceIn 1.2s ease-out forwards;
+}
+
+/* Staggered Animations */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* Blog Specific Animations */
+.blog-card-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
+
+.blog-card-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blog-title-animate {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 1.2s ease-out;
+}
+
+.blog-title-animate.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.blog-subtitle-animate {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 1.2s ease-out 0.3s;
+}
+
+.blog-subtitle-animate.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.blog-image-animate {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1s ease-out 0.4s;
+}
+
+.blog-image-animate.animated {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.blog-content-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-out 0.5s;
+}
+
+.blog-content-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sidebar-animate {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 1s ease-out 0.6s;
+}
+
+.sidebar-animate.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pagination-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-out 0.7s;
+}
+
+.pagination-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Breadcrumb Animation */
+.breadcrumb-animate {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.8s ease-out;
+}
+
+.breadcrumb-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Social Share Animation */
+.social-share-animate {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease-out 0.8s;
+}
+
+.social-share-animate.animated {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Category Tags Animation */
+.category-tag-animate {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.7s ease-out;
+}
+
+.category-tag-animate.animated {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Popular Blog Items Animation */
+.popular-item-animate {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.8s ease-out;
+}
+
+.popular-item-animate.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+  .blog-title-animate {
+    transform: translateY(-20px);
+  }
+
+  .blog-subtitle-animate {
+    transform: translateY(20px);
+  }
+
+  .sidebar-animate {
+    transform: translateY(30px);
+  }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .blog-card-animate,
+  .blog-title-animate,
+  .blog-subtitle-animate,
+  .blog-image-animate,
+  .blog-content-animate,
+  .sidebar-animate,
+  .pagination-animate,
+  .breadcrumb-animate,
+  .social-share-animate,
+  .category-tag-animate,
+  .popular-item-animate {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

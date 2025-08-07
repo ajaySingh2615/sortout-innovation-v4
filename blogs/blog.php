@@ -157,6 +157,9 @@ function truncateText($text, $length = 150) {
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/CSS/styles.css?v=2.0" />
     
+    <!-- Blog Animations CSS -->
+    <link rel="stylesheet" href="blog-animations.css" />
+    
     <!-- Blog Specific CSS -->
     <style>
         .ezy__blog7_uzmYkEn6 {
@@ -484,7 +487,7 @@ function truncateText($text, $length = 150) {
     ?>
 
     <!-- Breadcrumb -->
-    <section class="breadcrumb-section">
+    <section class="breadcrumb-section breadcrumb-animate">
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
@@ -503,8 +506,8 @@ function truncateText($text, $length = 150) {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h2 class="ezy__blog7_uzmYkEn6-heading mb-3 mt-0">Let's Now make an impression.</h2>
-                        <p class="ezy__blog7_uzmYkEn6-sub-heading mb-4">
+                        <h2 class="ezy__blog7_uzmYkEn6-heading mb-3 mt-0 blog-title-animate">Let's Now make an impression.</h2>
+                        <p class="ezy__blog7_uzmYkEn6-sub-heading mb-4 blog-subtitle-animate">
                             Explore our latest insights on digital transformation, marketing strategies, and innovative business solutions that drive success in today's competitive landscape.
                         </p>
                         <!-- <a href="#" class="btn ezy__blog7_uzmYkEn6-btn">
@@ -531,12 +534,12 @@ function truncateText($text, $length = 150) {
                 <div class="row mt-5">
                     <?php foreach ($blogs as $blog): ?>
                     <div class="col-12 col-md-6 col-lg-4 mb-3">
-                        <article class="ezy__blog7_uzmYkEn6-post">
+                        <article class="ezy__blog7_uzmYkEn6-post blog-card-animate">
                             <div class="position-relative">
                                 <img
                                     src="<?php echo !empty($blog['image_url']) ? htmlspecialchars($blog['image_url']) : 'https://cdn.easyfrontend.com/pictures/blog/blog_3.jpg'; ?>"
                                     alt="<?php echo htmlspecialchars($blog['title']); ?>"
-                                    class="img-fluid w-100 ezy-blog7-banner"
+                                    class="img-fluid w-100 ezy-blog7-banner blog-image-animate"
                                     style="height: 280px; object-fit: cover; object-position: center;"
                                 />
                                 <?php if (isset($blog['created_at'])): ?>
@@ -560,7 +563,7 @@ function truncateText($text, $length = 150) {
                                     $categories = is_array($blog['categories']) ? $blog['categories'] : explode(',', $blog['categories']);
                                     foreach (array_slice($categories, 0, 2) as $category): // Show max 2 categories
                                     ?>
-                                    <span class="blog-category-tag"><?php echo htmlspecialchars(trim($category)); ?></span>
+                                    <span class="blog-category-tag category-tag-animate"><?php echo htmlspecialchars(trim($category)); ?></span>
                                     <?php endforeach; ?>
                                 </div>
                                 <?php endif; ?>
@@ -588,7 +591,7 @@ function truncateText($text, $length = 150) {
                 <?php if ($pagination['total_pages'] > 1): ?>
                 <div class="row mt-5">
                     <div class="col-12">
-                        <nav aria-label="Blog pagination">
+                        <nav aria-label="Blog pagination" class="pagination-animate">
                             <ul class="pagination justify-content-center mb-0">
                                 <!-- Previous Page -->
                                 <li class="page-item <?php echo ($pagination['current_page'] <= 1) ? 'disabled' : ''; ?>">
@@ -666,6 +669,9 @@ function truncateText($text, $length = 150) {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Blog Animations JS -->
+    <script src="blog-animations.js"></script>
 
     <!-- Force Red Colors Script - Fallback for Hostinger -->
     <script>
